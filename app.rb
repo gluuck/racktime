@@ -6,27 +6,21 @@ class App
 
   def call(env)
     @request = Rack::Request.new(env)
-    params = if request.path_info == '/time'
-               time_response
-             else
-               [["Page not found."], 404, headers]
-             end
+    params = time_response
+             
     Rack::Response.new(*params).finish
   end
   
   private
 
-  def headers
-    { 'Content-Type' => 'text/plain' }
-  end
-
   def time_response
     time = TimeFormat.new(request.params)
     body =  time.get_time
     if time.success?      
-      [body, 200, headers]
+      [body, 200]
     else
-      [body, 400, headers]
+      [body, 400]
     end
   end
+  
 end

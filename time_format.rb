@@ -36,4 +36,5 @@ end
 def unknown_formats_keys
   formats - TIME_FORMAT.keys
 end
+
 end
